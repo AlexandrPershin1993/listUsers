@@ -1,7 +1,9 @@
-import { takeLatest } from 'redux-saga/effects';
+import { takeLatest, takeEvery } from 'redux-saga/effects';
 import listUsers from './listUsers';
-import { REQUEST_LIST_USERS } from '../reducers/listUsers';
+import redactionUsers from './redactionUsers';
+import { REQUEST_LIST_USERS, REQUEST_REDACTION_USER } from '../reducers/listUsers';
 
 export default function* rootSaga(){
    yield takeLatest(REQUEST_LIST_USERS, listUsers);
+   yield takeEvery(REQUEST_REDACTION_USER, redactionUsers);
 };

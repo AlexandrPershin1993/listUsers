@@ -70,7 +70,8 @@
 .list-users-popup-window-user-form {
   display: flex;
   width: 100%;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .list-users-popup-window-user-img-close {
@@ -80,4 +81,22 @@
   top:0;
   right: 0;
   cursor: pointer;
+}
+
+.list-users-popup-window-user-input {
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.list-users-popup-window-user-img-loading {
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  align-self: center;
+}
+
+.list-users-popup-window-user-span-error {
+  margin: 10px;
+  align-self: center;
+  font-size: 1.2rem;
 }
