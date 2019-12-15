@@ -10,7 +10,7 @@ const ListUsersContainer = () => {
       <ListUsers />
       <ListUsersPagination />
       <form className='list-users-container-form'>
-        <Button width='100%' height='50px' value='Добавить пользователя'/>
+        <Button width='100%' value='Добавить пользователя'/>
       </form>
     </div>
   )

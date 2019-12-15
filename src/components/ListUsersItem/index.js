@@ -1,16 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './index.css';
+import ListUsersPopupWindowUser from '../ListUsersPopupWindowUser';
 
 function ListUsersItem({ index, data, pagesNumber, ...props}){
+  let [popupWindowUser, setPopupWindowUser] = useState(false);
   return (
-    <figure className='list-users-item-figure'>
-      <img src={data[pagesNumber].data[index].avatar} alt='user' className='list-users-item-img-avatar'/>
-      <figcaption className='list-users-item-figcaption'>
-        {data[pagesNumber].data[index].first_name}
-      </figcaption>
-    </figure>
+    <div>
+      {(popupWindowUser) ? <ListUsersPopupWindowUser index={index} setPopupWindowUser={setPopupWindowUser} /> : null}
+      <figure className='list-users-item-figure' onClick={() => (setPopupWindowUser(true))} >
+        <img 
+          src={data[pagesNumber].data[index].avatar} 
+          alt='user' className='list-users-item-img-avatar'
+        />
+        <figcaption className='list-users-item-figcaption'>
+          {data[pagesNumber].data[index].first_name}
+        </figcaption>
+      </figure>
+     </div>
   )
 }
 
