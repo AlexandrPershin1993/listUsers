@@ -1,0 +1,11 @@
+.list-users-container {
+  width: 450px;
+  border: solid grey 1px;
+  background-color: white;
+}
+
+.list-users-container-form {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}

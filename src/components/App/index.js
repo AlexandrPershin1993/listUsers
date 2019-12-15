@@ -1,14 +1,14 @@
 import React from 'react';
 import './index.css';
+import ListUsersContainer from '../ListUsersContainer';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-       fgfgdfg
-      </header>
+    <div>
+      <ListUsersContainer />
     </div>
   );
 }
 
 export default App;
+

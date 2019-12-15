@@ -1,0 +1,14 @@
+.button-input {
+  outline-width: 0;
+  border: 1px;
+  background-color: cornflowerblue;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 18px;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+.button-input:hover {
+ opacity: 0.9;
+}

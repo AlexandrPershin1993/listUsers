@@ -1,0 +1,22 @@
+.list-users-item-img-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  transition-duration: 0.3s;
+}
+
+.list-users-item-figcaption {
+  font-size: 16px;
+  text-align: center;
+}
+
+.list-users-item-figure {
+  margin: 10px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.list-users-item-figure:hover img {
+  transform: scale(1.05);
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 5px 5px;
+}

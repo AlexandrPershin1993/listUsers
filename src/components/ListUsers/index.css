@@ -1,0 +1,28 @@
+.list-users {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 300px;
+  overflow: auto;
+}
+
+.list-users-li {
+  display: flex;
+  margin: 0;
+  padding:0;
+}
+
+.list-users-img-loading {
+ width: 50px;
+ height: 50px;
+}
+
+.list-users-li-error {
+  color: red;
+  font-size: 20px;
+  margin: 10px;
+}
