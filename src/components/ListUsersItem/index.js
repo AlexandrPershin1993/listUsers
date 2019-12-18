@@ -11,11 +11,11 @@ function ListUsersItem({ index, data, pagesNumber, ...props}){
       {(popupWindowUser) ? <ListUsersPopupWindowUser index={index} setPopupWindowUser={setPopupWindowUser} /> : null}
       <figure className='list-users-item-figure' onClick={() => (setPopupWindowUser(true))} >
         <img 
-          src={data[pagesNumber].data[index].avatar} 
+          src={data.data[index].avatar} 
           alt='user' className='list-users-item-img-avatar'
         />
         <figcaption className='list-users-item-figcaption'>
-          {data[pagesNumber].data[index].first_name}
+          {data.data[index].first_name}
         </figcaption>
       </figure>
      </div>

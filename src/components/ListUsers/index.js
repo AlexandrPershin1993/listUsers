@@ -7,7 +7,6 @@ import ListUsersItem from '../ListUsersItem';
 
 function ListUsers({statusData, pagesNumber, errorDataMessage, requestListUsers, data, ...props}){
   const requestListUsersEffect = () => {
-    if(data[pagesNumber]) return;
     requestListUsers(pagesNumber);
   }
   
@@ -15,7 +14,7 @@ function ListUsers({statusData, pagesNumber, errorDataMessage, requestListUsers,
   let itemUsers;
 
   if(statusData === 'succes'){
-    itemUsers = data[pagesNumber].data.map((item, index) => {
+    itemUsers = data.data.map((item, index) => {
       return (
         <li className='list-users-li' key = {item.id}>
           <ListUsersItem first_name={item.first_name} avatar={item.avatar} index={index}/>

@@ -7,13 +7,14 @@ import nameValidator from '../../validators/nameValidator';
 import surnameValidator from '../../validators/surnameValidator';
 import emailValidator from '../../validators/emailValidator';
 import { requestRedactionUser } from '../../reducers/listUsers';
+import ListUsersPopupWindowDeleteUser from '../ListUsersPopupWindowDeleteUser';
 
 function upperCaseOneChar(value){
   return value[0].toUpperCase() + value.substring(1);
 }
 
 function ListUsersPopupWindowUser({ index, data, pagesNumber, setPopupWindowUser, requestRedactionUser, statusRedaction, errorRedactionMessage, ...props}){
-  let userData = data[pagesNumber].data[index];
+  const userData = data.data[index];
 
   let [redaction, setRedaction] = useState(false);
   let [name, setName] = useState(userData.first_name);
@@ -24,6 +25,7 @@ function ListUsersPopupWindowUser({ index, data, pagesNumber, setPopupWindowUser
     true, 
     true
   ]);
+  let [popupWindowDeleteUser, setPopupWindowDeleteUser] = useState(false);
 
   const refInputName = useRef(null);
   const refInputSurname = useRef(null);
@@ -184,13 +186,21 @@ function ListUsersPopupWindowUser({ index, data, pagesNumber, setPopupWindowUser
               setSurname(userData.last_name);
               setEmail(userData.email);
             }} /> : null}
-            {(!redaction && statusRedaction !== 'loading') ? <Button value='Редактировать' width='150px' click = {() => {
-              setRedaction(true);
-              setName(userData.first_name);
-              setSurname(userData.last_name);
-              setEmail(userData.email);
-            }} /> : null}
+            {(!redaction && statusRedaction !== 'loading') ? (
+              <Button value='Редактировать' width='150px' click = {() => {
+                setRedaction(true);
+                setName(userData.first_name);
+                setSurname(userData.last_name);
+                setEmail(userData.email);
+              }} />
+            ) : null}
+            {(!redaction && statusRedaction !== 'loading') ? (
+              <Button value='Удалить' width='150px' click = {() => {
+               setPopupWindowDeleteUser(true);
+              }} />
+            ) : null}
           </form>
+          {popupWindowDeleteUser ? <ListUsersPopupWindowDeleteUser setPopupWindowUser={setPopupWindowUser} setPopupWindowDeleteUser={setPopupWindowDeleteUser} index={index}/> : null}
           {(statusRedaction === 'loading') ? <img src='images/loading.gif' alt='loading' className='list-users-popup-window-user-img-loading' /> : null}
         </div>
       </div>

@@ -5,20 +5,14 @@ import './index.css';
 import { toDoStepPagination } from '../../reducers/listUsers'
 
 function ListUsersPagination({ data, pagesNumber, toDoStepPagination, ...props}){
-  if(!data[1]) return null;
   let paginationArray = [];
+  
   function clickButton(event){
-    let value = {
-      value: +event.target.value,
-      cache: false
-    };
-    if(data[+event.target.value]){
-      value.cache = true;
-    }
-    toDoStepPagination(value);
+    if(+event.target.value === pagesNumber) return;
+    toDoStepPagination(+event.target.value);
   }
 
-  for(let i = 1; i <= data[1].total_pages; i++){
+  for(let i = 1; i <= data.total_pages; i++){
     paginationArray.push((
       <input 
         type='button' 

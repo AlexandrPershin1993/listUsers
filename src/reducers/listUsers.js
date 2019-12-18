@@ -1,10 +1,13 @@
 const initialState = {
   data: {},
+  dataUsers: [],
   statusData: 'loading',
   errorDataMessage: '',
   pagesNumber: 1,
   statusRedaction: '',
-  errorRedactionMessage:''
+  errorRedactionMessage:'',
+  statusDelete: '',
+  errorDeleteMessage:''
 }
 
 export const REQUEST_DATA_LOADING = 'REQUEST_DATA_LOADING';
@@ -16,6 +19,11 @@ export const REQUEST_REDACTION_LOADING = 'REQUEST_REDACTION_LOADING';
 export const REQUEST_REDACTION_ERROR = 'REQUEST_REDACTION_ERROR';
 export const REQUEST_REDACTION_SUCCES = 'REQUEST_REDACTION_SUCCES';
 export const REQUEST_REDACTION_USER = 'REQUEST_REDACTION_USER';
+export const REQUEST_DELETE_LOADING = 'REQUEST_DELETE_LOADING';
+export const REQUEST_DELETE_ERROR = 'REQUEST_DELETE_ERROR';
+export const REQUEST_DELETE_SUCCES = 'REQUEST_DELETE_SUCCES';
+export const REQUEST_DELETE_USER = 'REQUEST_DELETE_USER';
+export const DELETE_STATUS_RESET = 'DELETE_STATUS_RESET';
 
 export const requestDataLoading = () => {
   return {
@@ -78,6 +86,39 @@ export const requestRedactionUser = (value) => {
   }
 }
 
+export const requestDeleteLoading = () => {
+  return {
+    type: REQUEST_DELETE_LOADING
+  }
+}
+
+export const requestDeleteError = (value) => {
+  return {
+    type: REQUEST_DELETE_ERROR,
+    value
+  }
+}
+
+export const requestDeleteSucces = (value) => {
+  return {
+    type: REQUEST_DELETE_SUCCES,
+    value
+  }
+}
+
+export const requestDeleteUser = (value) => {
+  return {
+    type: REQUEST_DELETE_USER,
+    value
+  }
+}
+
+export const  deleteStatusReset = () => {
+  return {
+    type: DELETE_STATUS_RESET
+  }
+}
+
 export default function listUsers(state = initialState, action){
   switch(action.type){
     case REQUEST_DATA_LOADING:
@@ -95,16 +136,13 @@ export default function listUsers(state = initialState, action){
       return {
         ...state,
         statusData: 'succes',
-        data: {
-          ...state.data,
-          [state.pagesNumber]: action.value
-        }
+        data: action.value
       }
     case TO_DO_STEP_PAGINATION:
       return {
         ...state,
-        pagesNumber: action.value.value,
-        statusData: (action.value.cache === false) ? 'loading' : 'succes',
+        pagesNumber: action.value,
+        statusData: 'loading',
       }
     case REQUEST_REDACTION_LOADING:
       return {
@@ -119,11 +157,32 @@ export default function listUsers(state = initialState, action){
       }
     case REQUEST_REDACTION_SUCCES:
       const dataRedaction = {...state.data};
-      dataRedaction[state.pagesNumber].data[action.value.index] = {...dataRedaction[state.pagesNumber].data[action.value.index], ...action.value.objectData}
+      dataRedaction.data[action.value.index] = {...dataRedaction.data[action.value.index], ...action.value.objectData}
       return {
         ...state,
         statusRedaction: 'succes',
         data: dataRedaction
+      }
+    case REQUEST_DELETE_LOADING:
+      return {
+        ...state,
+        statusDelete: 'loading'
+      }
+    case REQUEST_DELETE_ERROR:
+      return {
+        ...state,
+        statusDelete: 'error',
+        errorDeleteMessage: action.value
+      }
+    case REQUEST_DELETE_SUCCES:
+      return {
+        ...state,
+        statusDelete: 'succes'
+      }
+    case DELETE_STATUS_RESET:
+      return {
+        ...state,
+        statusDelete: ''
       }
     default:
       return state;
