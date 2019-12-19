@@ -10,7 +10,7 @@ import { requestRedactionUser } from '../../reducers/listUsers';
 import ListUsersPopupWindowDeleteUser from '../ListUsersPopupWindowDeleteUser';
 
 function upperCaseOneChar(value){
-  return value[0].toUpperCase() + value.substring(1);
+  return value[0].toUpperCase() + value.substring(1).toLowerCase();
 }
 
 function ListUsersPopupWindowUser({ index, data, pagesNumber, setPopupWindowUser, requestRedactionUser, statusRedaction, errorRedactionMessage, ...props}){
@@ -81,7 +81,7 @@ function ListUsersPopupWindowUser({ index, data, pagesNumber, setPopupWindowUser
   }
 
   function inputRedactionName(event){
-    const value = event.target.value.replace(/[\d\s]/g,'');
+    const value = event.target.value.replace(/[^a-z^а-я]/gi,'');
     let arrayInputValid = inputValid;
     arrayInputValid[0] = true;
     setInputValid(arrayInputValid);
@@ -92,7 +92,7 @@ function ListUsersPopupWindowUser({ index, data, pagesNumber, setPopupWindowUser
     let arrayInputValid = inputValid;
     arrayInputValid[1] = true;
     setInputValid(arrayInputValid);
-    const value = event.target.value.replace(/[\d\s]/g,'');
+    const value = event.target.value.replace(/[^a-z^а-я]/gi,'');
     setSurname(value);
   }
 
@@ -200,7 +200,7 @@ function ListUsersPopupWindowUser({ index, data, pagesNumber, setPopupWindowUser
               }} />
             ) : null}
           </form>
-          {popupWindowDeleteUser ? <ListUsersPopupWindowDeleteUser setPopupWindowUser={setPopupWindowUser} setPopupWindowDeleteUser={setPopupWindowDeleteUser} index={index}/> : null}
+          {popupWindowDeleteUser ? <ListUsersPopupWindowDeleteUser setPopupWindowDeleteUser={setPopupWindowDeleteUser} index={index}/> : null}
           {(statusRedaction === 'loading') ? <img src='images/loading.gif' alt='loading' className='list-users-popup-window-user-img-loading' /> : null}
         </div>
       </div>

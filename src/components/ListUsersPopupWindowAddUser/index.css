@@ -1,0 +1,67 @@
+.list-users-popup-window-add-user {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+.list-users-popup-window-add-user-div-data {
+  box-sizing: border-box;
+  background-color: white;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: solid 1px grey;
+  position: relative;
+}
+
+.list-users-popup-window-add-user-form {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.list-users-popup-window-add-user-div-h3 {
+  font-size: 1.3rem;
+  margin: 30px
+}
+
+.list-users-popup-window-add-user-img-loading {
+  width: 50px;
+  height: 50px;
+  margin: 30px;
+}
+
+.list-users-popup-window-add-user-span-error {
+  color: red;
+  display: block;
+  font-size: 1.2rem;
+  margin: 30px;
+}
+
+.list-users-popup-window-add-user-span-succes {
+  font-size: 1.2rem;
+  margin: 30px
+}
+
+.list-users-popup-window-add-user-input {
+  font-size: 1rem;
+  padding: 5px;
+  margin:10px;
+}
+
+.list-users-popup-window-add-img-close {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top:0;
+  right: 0;
+  cursor: pointer;
+}

@@ -7,7 +7,9 @@ const initialState = {
   statusRedaction: '',
   errorRedactionMessage:'',
   statusDelete: '',
-  errorDeleteMessage:''
+  errorDeleteMessage:'',
+  statusAdd: '',
+  errorAddMessage:''
 }
 
 export const REQUEST_DATA_LOADING = 'REQUEST_DATA_LOADING';
@@ -23,7 +25,12 @@ export const REQUEST_DELETE_LOADING = 'REQUEST_DELETE_LOADING';
 export const REQUEST_DELETE_ERROR = 'REQUEST_DELETE_ERROR';
 export const REQUEST_DELETE_SUCCES = 'REQUEST_DELETE_SUCCES';
 export const REQUEST_DELETE_USER = 'REQUEST_DELETE_USER';
-export const DELETE_STATUS_RESET = 'DELETE_STATUS_RESET';
+export const DELETE_USER_TIMER_END = 'DELETE_USER_TIMER_END';
+export const REQUEST_ADD_LOADING = 'REQUEST_ADD_LOADING';
+export const REQUEST_ADD_ERROR = 'REQUEST_ADD_ERROR';
+export const REQUEST_ADD_SUCCES = 'REQUEST_ADD_SUCCES';
+export const REQUEST_ADD_USER = 'REQUEST_ADD_USER';
+export const ADD_USER_TIMER_END = 'ADD_USER_TIMER_END';
 
 export const requestDataLoading = () => {
   return {
@@ -113,9 +120,44 @@ export const requestDeleteUser = (value) => {
   }
 }
 
-export const  deleteStatusReset = () => {
+export const  deleteUserTimerEnd = (value) => {
   return {
-    type: DELETE_STATUS_RESET
+    type: DELETE_USER_TIMER_END,
+    value
+  }
+}
+
+export const requestAddLoading = () => {
+  return {
+    type: REQUEST_ADD_LOADING
+  }
+}
+
+export const requestAddError = (value) => {
+  return {
+    type: REQUEST_ADD_ERROR,
+    value
+  }
+}
+
+export const requestAddSucces = (value) => {
+  return {
+    type: REQUEST_ADD_SUCCES,
+    value
+  }
+}
+
+export const requestAddUser = (value) => {
+  return {
+    type: REQUEST_ADD_USER,
+    value
+  }
+}
+
+export const  addUserTimerEnd = (value) => {
+  return {
+    type: ADD_USER_TIMER_END,
+    value
   }
 }
 
@@ -179,10 +221,42 @@ export default function listUsers(state = initialState, action){
         ...state,
         statusDelete: 'succes'
       }
-    case DELETE_STATUS_RESET:
+    case DELETE_USER_TIMER_END:
       return {
         ...state,
+        data: { 
+          ...state.data,
+          data: state.data.data.filter((value, index)=>(index !== action.value.index)) 
+        },
         statusDelete: ''
+      }
+    case REQUEST_ADD_LOADING:
+      return {
+        ...state,
+        statusAdd: 'loading'
+      }
+    case REQUEST_ADD_ERROR:
+      return {
+        ...state,
+        statusAdd: 'error',
+        errorAddMessage: action.value
+      }
+    case REQUEST_ADD_SUCCES:
+      return {
+        ...state,
+        statusAdd: 'succes'
+      }
+    case ADD_USER_TIMER_END:
+      return {
+        ...state,
+        statusAdd: '',
+        data: { 
+          ...state.data,
+          data: [
+            ...state.data.data,
+            action.value
+          ]
+        }
       }
     default:
       return state;
